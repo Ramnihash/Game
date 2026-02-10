@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Level</title>
@@ -8,10 +9,16 @@
 
 <body class="level-screen">
 
-  <!-- Top Info Bar -->
-  <div class="info-bar">
-    <span id="levelText">Level 1</span>
-    <span id="progressText">Progress: 0</span>
+  <!-- Top HUD -->
+  <div class="hud-bar">
+    <div class="hud-item">
+      <span class="hud-label">LEVEL</span>
+      <span id="levelText" class="hud-value">1</span>
+    </div>
+    <div class="hud-item">
+      <span class="hud-label">CLICKS</span>
+      <span id="clickCounter" class="hud-value">0</span>
+    </div>
   </div>
 
   <!-- Grid Container -->
@@ -19,11 +26,13 @@
     <div class="grid" id="grid"></div>
   </div>
 
-  <!-- Feedback Box -->
-  <div class="feedback" id="feedback">
-    Observe the realm.
+  <!-- Bottom Hint/Feedback -->
+  <div class="hint-box">
+    <div class="hint-label">SYSTEM MESSAGE</div>
+    <div id="feedback" class="hint-text">OBSERVE THE REALM.</div>
   </div>
 
   <script src="scriptg.js"></script>
 </body>
+
 </html>
