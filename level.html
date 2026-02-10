@@ -9,27 +9,39 @@
 
 <body class="level-screen">
 
-  <!-- Top HUD -->
-  <div class="hud-bar">
-    <div class="hud-item">
-      <span class="hud-label">LEVEL</span>
-      <span id="levelText" class="hud-value">1</span>
-    </div>
-    <div class="hud-item">
-      <span class="hud-label">CLICKS</span>
-      <span id="clickCounter" class="hud-value">0</span>
-    </div>
-  </div>
+  <div class="game-container">
 
-  <!-- Grid Container -->
-  <div class="grid-wrapper">
-    <div class="grid" id="grid"></div>
-  </div>
+    <!-- Left Panel: Status Feedback -->
+    <div class="panel left-panel">
+      <div class="panel-box">
+        <span class="label">STATUS</span>
+        <span id="statusText" class="value status-neutral">READY</span>
+      </div>
+      <div class="panel-box" id="ruleBox" style="visibility: hidden;">
+        <span class="label">RULE DISCOVERED</span>
+        <span id="feedback" class="value rule-text">...</span>
+      </div>
+    </div>
 
-  <!-- Bottom Hint/Feedback -->
-  <div class="hint-box">
-    <div class="hint-label">SYSTEM MESSAGE</div>
-    <div id="feedback" class="hint-text">OBSERVE THE REALM.</div>
+    <!-- Center Panel: Grid -->
+    <div class="panel center-panel">
+      <div class="grid-wrapper">
+        <div class="grid" id="grid"></div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Game Stats -->
+    <div class="panel right-panel">
+      <div class="panel-box">
+        <span class="label">LEVEL</span>
+        <span id="levelText" class="value">1</span>
+      </div>
+      <div class="panel-box">
+        <span class="label">MOVES LEFT</span>
+        <span id="clickCounter" class="value">0</span>
+      </div>
+    </div>
+
   </div>
 
   <script src="scriptg.js"></script>
