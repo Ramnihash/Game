@@ -86,51 +86,90 @@ body.level-screen {
   /* Prevent scrollbars if possible */
 }
 
-/* HUD Styling */
-.hud-bar {
-  position: absolute;
-  top: 20px;
-  width: 100%;
+/* Layout */
+.game-container {
   display: flex;
-  justify-content: space-around;
-  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  padding: 0 50px;
+  /* Spacing from edges */
   box-sizing: border-box;
 }
 
-.hud-item {
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.left-panel,
+.right-panel {
+  width: 250px;
+}
+
+.center-panel {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Boxes */
+.panel-box {
   border: 4px solid #ffaa00;
-  padding: 15px 20px;
+  padding: 20px;
   background-color: #000;
   box-shadow: 4px 4px 0px #ab7100;
   text-align: center;
-  min-width: 150px;
+  margin-bottom: 20px;
 }
 
-.hud-label {
+.label {
   display: block;
   font-size: 0.8rem;
   margin-bottom: 10px;
   opacity: 0.8;
+  color: #ffaa00;
 }
 
-.hud-value {
-  font-size: 1.2rem;
+.value {
+  font-size: 1.5rem;
   font-weight: bold;
+  display: block;
 }
 
-/* Grid Wrapper & Grid */
+/* Status Colors */
+.status-valid {
+  color: #00ff00;
+  /* Green */
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.status-invalid {
+  color: #ff0000;
+  /* Red */
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.status-neutral {
+  color: #ffaa00;
+}
+
+/* Grid Wrapper Override */
 .grid-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  /* Shift up slightly to make room for hint box */
+  position: relative;
+  /* Reset absolute */
+  top: auto;
+  left: auto;
+  transform: none;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(8, 50px);
-  /* Slightly smaller tiles to fit */
   grid-template-rows: repeat(8, 50px);
   gap: 4px;
   border: 4px solid #ffaa00;
@@ -162,31 +201,10 @@ body.level-screen {
   box-shadow: 0 0 10px #ffaa00;
 }
 
-/* Hint Box Styling */
-.hint-box {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 600px;
-  border: 4px solid #ffaa00;
-  background-color: #000;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 4px 4px 0px #ab7100;
-}
-
-.hint-label {
-  font-size: 0.7rem;
-  margin-bottom: 8px;
-  border-bottom: 2px solid #553300;
-  padding-bottom: 4px;
-  display: inline-block;
-}
-
-.hint-text {
-  font-size: 0.9rem;
+.rule-text {
+  font-size: 0.8rem;
   line-height: 1.4;
   text-transform: uppercase;
+  color: #ffaa00;
+  display: block;
 }
