@@ -34,6 +34,8 @@ const LEVELS = [
 const gridElement = document.getElementById("grid");
 const levelText = document.getElementById("levelText");
 const clickCounterElement = document.getElementById("clickCounter"); // Now "Moves Left"
+const statusText = document.getElementById("statusText");
+const ruleBox = document.getElementById("ruleBox");
 const feedbackElement = document.getElementById("feedback");
 const enterBtn = document.getElementById("enterBtn");
 
@@ -87,13 +89,18 @@ function startLevel(levelId) {
   levelText.textContent = currentState.level;
   clickCounterElement.textContent = currentState.movesLeft;
 
-  // Update "CLICKS" label to "MOVES" if possible, or just treat it as moves
-  // Ideally we'd change the HTML label too, but let's assume the user knows
-  const hudLabel = document.querySelector('.hud-item:nth-child(2) .hud-label');
-  if (hudLabel) hudLabel.textContent = "MOVES LEFT";
+  // Status Panel Reset
+  if (statusText) {
+    statusText.textContent = "READY";
+    statusText.className = "value status-neutral";
+  }
 
-  feedbackElement.textContent = config.rule.toUpperCase();
-  feedbackElement.style.color = "#ffaa00";
+  // Hide Rule initially
+  if (ruleBox) ruleBox.style.visibility = "hidden";
+  if (feedbackElement) {
+    feedbackElement.textContent = config.rule.toUpperCase(); // Set text but keep hidden
+    feedbackElement.style.color = "#ffaa00";
+  }
 
   // Grid Generation
   createGrid();
@@ -140,8 +147,12 @@ function handleTileClick(row, col) {
   // Visuals
   const tile = getTile(row, col);
   tile.classList.add("selected");
-  // Optional: keep it selected or flash it? 
-  // User req: "A tile cannot be clicked more than once" -> so keeping it selected effectively marks it
+
+  // Status Feedback: Valid
+  if (statusText) {
+    statusText.textContent = "VALID";
+    statusText.className = "value status-valid";
+  }
 
   // 3. Win Condition
   if (currentState.movesLeft === 0) {
@@ -260,16 +271,27 @@ function startCursedMovement() {
 // Outcomes
 function failGame(reason) {
   currentState.gameActive = false;
-  feedbackElement.textContent = `FAILURE: ${reason}`;
-  feedbackElement.style.color = "red";
+
+  // Status Feedback: Invalid
+  if (statusText) {
+    statusText.textContent = "INVALID";
+    statusText.className = "value status-invalid";
+  }
+  console.log(`Failed: ${reason}`);
+
   gridElement.style.pointerEvents = "none";
   if (currentState.cursedInterval) clearInterval(currentState.cursedInterval);
 }
 
 function winLevel() {
   currentState.gameActive = false;
-  feedbackElement.textContent = "LEVEL CLEARED. RETURNING...";
-  feedbackElement.style.color = "#00ff00"; // Green
+  if (statusText) {
+    statusText.textContent = "CLEARED";
+    statusText.className = "value status-valid";
+  }
+
+  // Reveal Rule
+  if (ruleBox) ruleBox.style.visibility = "visible";
 
   // Unlock next level
   const unlocked = parseInt(localStorage.getItem("maxLevel")) || 1;
@@ -281,7 +303,7 @@ function winLevel() {
 
   setTimeout(() => {
     window.location.href = "tree.html";
-  }, 2000);
+  }, 4000); // Give time to read rule
 }
 
 // Start
