@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+body.start-screen {
+  background-image: url("assets/1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+.image-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.enter-btn {
+  width: 240px;
+  height: 70px;
+  bottom: 340px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+body.center-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body.tree-screen {
+  background-image: url("assets/2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+.node {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+/* Example positions – YOU ADJUST THESE */
+.node[data-level="1"] {
+  top: 35%;
+  left: 50%;
+}
+.node[data-level="2"] {
+  top: 50%;
+  left: 45%;
+}
+.node[data-level="3"] {
+  top: 50%;
+  left: 55%;
+}
+.locked {
+  pointer-events: none;
+}
+
+body.level-screen {
+  background-image: url("assets/3.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: white;
+}
+.info-bar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 40px;
+  font-size: 1.1rem;
+}
+.grid-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  gap: 2px;
+}
+.tile {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+.tile:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
