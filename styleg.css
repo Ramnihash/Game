@@ -2,10 +2,13 @@
   margin: 0;
   padding: 0;
 }
-html, body {
+
+html,
+body {
   width: 100%;
   height: 100%;
 }
+
 body.start-screen {
   background-image: url("assets/1.png");
   background-size: cover;
@@ -13,12 +16,14 @@ body.start-screen {
   background-repeat: no-repeat;
   min-height: 100vh;
 }
+
 .image-btn {
   position: absolute;
   background: transparent;
   border: none;
   cursor: pointer;
 }
+
 .enter-btn {
   width: 240px;
   height: 70px;
@@ -26,12 +31,14 @@ body.start-screen {
   left: 50%;
   transform: translateX(-50%);
 }
+
 body.center-screen {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 body.tree-screen {
   background-image: url("assets/2.png");
   background-size: cover;
@@ -39,62 +46,147 @@ body.tree-screen {
   background-repeat: no-repeat;
   min-height: 100vh;
 }
+
 .node {
   width: 60px;
   height: 60px;
   border-radius: 50%;
 }
+
 /* Example positions – YOU ADJUST THESE */
 .node[data-level="1"] {
   top: 35%;
   left: 50%;
 }
+
 .node[data-level="2"] {
   top: 50%;
   left: 45%;
 }
+
 .node[data-level="3"] {
   top: 50%;
   left: 55%;
 }
+
 .locked {
   pointer-events: none;
 }
 
+/* Import Pixel Font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body.level-screen {
-  background-image: url("assets/3.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #000;
   min-height: 100vh;
-  color: white;
+  color: #ffaa00;
+  /* Orange */
+  font-family: 'Press Start 2P', cursive;
+  overflow: hidden;
+  /* Prevent scrollbars if possible */
 }
-.info-bar {
+
+/* HUD Styling */
+.hud-bar {
   position: absolute;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
   display: flex;
-  gap: 40px;
-  font-size: 1.1rem;
+  justify-content: space-around;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
+
+.hud-item {
+  border: 4px solid #ffaa00;
+  padding: 15px 20px;
+  background-color: #000;
+  box-shadow: 4px 4px 0px #ab7100;
+  text-align: center;
+  min-width: 150px;
+}
+
+.hud-label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.hud-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Grid Wrapper & Grid */
 .grid-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
+  /* Shift up slightly to make room for hint box */
 }
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(8, 60px);
-  grid-template-rows: repeat(8, 60px);
-  gap: 2px;
+  grid-template-columns: repeat(8, 50px);
+  /* Slightly smaller tiles to fit */
+  grid-template-rows: repeat(8, 50px);
+  gap: 4px;
+  border: 4px solid #ffaa00;
+  padding: 4px;
+  background-color: #000;
+  box-shadow: 0 0 20px rgba(255, 170, 0, 0.2);
 }
+
 .tile {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
+  background: transparent;
+  border: 2px solid #553300;
+  /* Darker orange/brown for unselected */
+  padding: 0;
+  transition: all 0.1s;
 }
+
 .tile:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 170, 0, 0.2);
+  border-color: #ffaa00;
+  box-shadow: inset 0 0 10px rgba(255, 170, 0, 0.5);
+}
+
+.tile.selected {
+  background-color: #ffaa00;
+  border-color: #ffaa00;
+  box-shadow: 0 0 10px #ffaa00;
+}
+
+/* Hint Box Styling */
+.hint-box {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  border: 4px solid #ffaa00;
+  background-color: #000;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 4px 4px 0px #ab7100;
+}
+
+.hint-label {
+  font-size: 0.7rem;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #553300;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+
+.hint-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
