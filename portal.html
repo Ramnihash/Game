@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Levels</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portalstyle.css">
+</head>
+
+<body>
+
+  <!-- SPACE BACKGROUND -->
+  <div id="space-bg">
+    <div class="stars"></div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div id="treePage">
+
+    <h2 class="levelsTitle">Levels</h2>
+    <div id="portalContainer">
+      <svg id="line-svg">
+        <path id="path-locked"></path>
+        <path id="path-active"></path>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- RESET BUTTON -->
+  <button id="resetBtn" class="reset-btn">RESET PROGRESS</button>
+
+  <!-- CONFIRM MODAL -->
+  <div id="confirmOverlay" class="overlay hidden">
+    <div class="overlay-box confirm-box">
+      <h2>⚠ WARNING ⚠</h2>
+      <p>This will wipe all progress and lock the portals.</p>
+      <p>Are you sure?</p>
+      <div class="confirm-buttons">
+        <button id="confirmResetBtn" class="danger-btn">YES, RESET</button>
+        <button id="cancelResetBtn" class="cancel-btn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="portalscript.js"></script>
+
+</body>
+
+</html>

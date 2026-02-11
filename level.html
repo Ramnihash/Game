@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Controlled Anomaly Realm</title>
+  <link rel="stylesheet" href="styleg.css">
+</head>
+
+<body class="level-screen">
+
+  <div id="space">
+    <div class="stars"></div>
+  </div>
+
+  <div class="level-header">
+    <div id="levelInfo"></div>
+    <div id="feedback" class="feedback">Analyze the anomaly.</div>
+    <div class="header-right">
+      <div id="hintBtn" class="hint-btn">?</div>
+      <div id="movesLeft"></div>
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <div class="grid-wrapper">
+    <div id="grid" class="grid"></div>
+  </div>
+
+
+
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-box win-box">
+      <div class="celebration-text" id="celebrationText"></div>
+
+      <h2 id="resultTitle"></h2>
+      <p id="ruleReveal"></p>
+
+      <div id="overlayButtons"></div>
+    </div>
+  </div>
+
+  <!-- RULES MODAL -->
+  <div id="rulesOverlay" class="overlay hidden">
+    <div class="overlay-box rules-box">
+      <h2>Active Anomalies</h2>
+      <ul id="rulesList"></ul>
+      <button id="closeRulesBtn">Close</button>
+    </div>
+  </div>
+
+
+  <script src="scriptg.js"></script>
+</body>
+
+</html>

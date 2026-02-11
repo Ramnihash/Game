@@ -1,0 +1,348 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  background: black;
+  overflow: hidden;
+  font-family: 'Press Start 2P', monospace;
+  color: #ff9f43;
+}
+
+/* ================= SPACE BACKGROUND ================= */
+#space-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, #2a2a2a 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #1f1f1f 0%, transparent 45%),
+    linear-gradient(#0b0b12, #000);
+  z-index: 0;
+}
+
+/* ================= STARS ================= */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: starDrift linear infinite;
+}
+
+.star.tiny {
+  width: 1px;
+  height: 1px;
+  background: #bfbfbf;
+}
+
+.star.mid {
+  width: 2px;
+  height: 2px;
+  background: #dddddd;
+}
+
+.star.big {
+  width: 3px;
+  height: 3px;
+  background: #ffd36a;
+}
+
+@keyframes starDrift {
+  from {
+    transform: translateY(-10vh);
+  }
+
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+/* ================= PAGE ================= */
+#treePage {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  margin-top: 60px;
+
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+#treePage.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.levelsTitle {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+/* ================= PORTALS ================= */
+#portalContainer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 6;
+}
+
+#line-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  /* Behind portals */
+  overflow: visible;
+}
+
+#line-svg path {
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  transition: d 0.3s ease;
+}
+
+#path-active {
+  stroke: #ff9f43;
+  filter: drop-shadow(0 0 5px rgba(255, 159, 67, 0.8));
+}
+
+#path-locked {
+  stroke: #444;
+  /* Dim gray */
+  stroke-dasharray: 5, 5;
+  /* Dashed line for locked path */
+  opacity: 0.5;
+}
+
+/* PORTAL */
+.portal {
+  position: absolute;
+  z-index: 2;
+  /* Sit above the line */
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 50%;
+  border: 3px solid #ffd36a;
+
+  background: #000;
+  /* Opaque black to hide the line behind */
+
+  box-shadow:
+    0 0 18px rgba(255, 211, 106, 0.9),
+    inset 0 0 10px rgba(255, 211, 106, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffd36a;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+
+  cursor: pointer;
+
+  /* REMOVE DEFAULT BUTTON STYLES */
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  animation: portalPulse 2.2s ease-in-out infinite;
+}
+
+.portal.locked {
+  border-color: #555;
+  color: #555;
+  box-shadow: none;
+  background: #111;
+  pointer-events: none;
+  /* Disable interaction */
+  animation: none;
+}
+
+.portal.locked::before {
+  display: none;
+  /* No spinner for locked */
+}
+
+.portal:hover:not(.locked) {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 28px rgba(255, 211, 106, 1),
+    inset 0 0 14px rgba(255, 211, 106, 0.7);
+}
+
+.portal:active {
+  transform: scale(0.95);
+}
+
+@keyframes portalPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.portal::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 211, 106, 0.35);
+  animation: portalSpin 8s linear infinite;
+}
+
+@keyframes portalSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.portal span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  color: #ffd36a;
+}
+
+/* ================= RESET BUTTON ================= */
+.reset-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: transparent;
+  border: 2px solid #ff4444;
+  color: #ff4444;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  z-index: 100;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+}
+
+.reset-btn:hover {
+  background: rgba(255, 68, 68, 0.1);
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+  transform: scale(1.05);
+}
+
+/* ================= CONFIRM MODAL ================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.confirm-box {
+  background: #111;
+  border: 2px solid #ff4444;
+  padding: 30px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(255, 68, 68, 0.2);
+}
+
+.confirm-box h2 {
+  color: #ff4444;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.confirm-box p {
+  color: #ddd;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.confirm-buttons button {
+  padding: 10px 25px;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.2s;
+}
+
+.danger-btn {
+  background: #ff4444;
+  color: black;
+  box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.danger-btn:hover {
+  background: #ff6666;
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid #888 !important;
+  color: #888;
+}
+
+.cancel-btn:hover {
+  border-color: #aaa !important;
+  color: #aaa;
+}

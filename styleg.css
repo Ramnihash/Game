@@ -1,0 +1,626 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body.start-screen {
+  background-image: url("assets/1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+body.center-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-btn {
+  width: 350px;
+  height: 100px;
+  background-image: url('assets/button.png');
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  border-radius: 40px;
+}
+
+/* ================= FROM STYLE.CSS ================= */
+
+body {
+  background: black;
+  font-family: 'Press Start 2P', monospace;
+  overflow: hidden;
+  color: #ff9f43;
+}
+
+/* ================= SPACE (DEFAULT/BRIGHT) ================= */
+#space {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: black;
+  overflow: hidden;
+}
+
+/* moving stars */
+.stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: starFall linear infinite, twinkle 2.5s ease-in-out infinite;
+}
+
+/* size variations */
+.star.tiny {
+  width: 1px;
+  height: 1px;
+  background: #bfbfbf;
+}
+
+.star.mid {
+  width: 2px;
+  height: 2px;
+  background: #dddddd;
+}
+
+.star.big {
+  width: 3px;
+  height: 3px;
+  background: #ffd36a;
+}
+
+/* warp flash effect */
+#space.warp {
+  animation: warpFlash 0.6s ease;
+}
+
+@keyframes warpFlash {
+  0% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(2.5);
+  }
+
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* ================= START SCREEN ================= */
+#startScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #1b1b1b, black);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+#startScreen.entering {
+  transform: scale(1.2);
+  opacity: 0;
+}
+
+.title {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* button */
+/* button */
+#enterBtn {
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  font-family: inherit;
+  /* Press Start 2P */
+  color: #ffaa00;
+  background: transparent;
+  border: 2px solid #ffaa00;
+  border-radius: 0;
+  /* Boxy retro feel */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+}
+
+#enterBtn:hover {
+  background: rgba(255, 170, 0, 0.15);
+  box-shadow: 0 0 25px rgba(255, 170, 0, 0.8), 0 0 50px rgba(255, 170, 0, 0.4);
+  transform: translateY(-2px);
+  /* Slight lift */
+  text-shadow: 0 0 8px rgba(255, 170, 0, 0.8);
+}
+
+#enterBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+}
+
+/* ================= ENTERING TEXT ================= */
+#enteringText {
+  position: fixed;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  opacity: 0;
+  z-index: 3;
+}
+
+#enteringText.showText {
+  opacity: 1;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* ================= FADE OVERLAY ================= */
+#fadeOverlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.8s ease;
+}
+
+#fadeOverlay.show {
+  opacity: 1;
+}
+
+
+
+/* =====================================================
+   LEVEL SCREEN
+===================================================== */
+
+.level-screen {
+  background: #0b0b0b;
+  color: white;
+  overflow: auto;
+  /* Allow scrolling */
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+
+/* ===== HEADER ===== */
+
+.level-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid #ffaa00;
+  color: #ffaa00;
+  text-shadow: 0 0 6px rgba(255, 165, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hint-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ffaa00;
+  background: transparent;
+  color: #ffaa00;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+}
+
+.hint-btn:hover {
+  background: rgba(255, 165, 0, 0.1);
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* ===== HEARTS (LIVES) ===== */
+
+/* ===== HEARTS (LIVES) ===== */
+
+.hearts {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  height: 35px;
+}
+
+.heart-icon {
+  width: 30px;
+  height: 30px;
+  fill: #ffaa00;
+  stroke: #ffaa00;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 5px rgba(255, 170, 0, 0.6));
+  transition: all 0.3s ease;
+}
+
+.heart-icon.filled {
+  fill: #ffaa00;
+  stroke: none;
+}
+
+.heart-icon.empty {
+  fill: transparent;
+  stroke: #ffaa00;
+  stroke-width: 2px;
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+@keyframes heartShake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.heart-shake {
+  animation: heartShake 0.4s ease-in-out;
+}
+
+.heart-lost {
+  animation: heartLoss 0.5s ease-out forwards;
+}
+
+/* ===== GRID ===== */
+
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 65px);
+  grid-template-rows: repeat(8, 65px);
+  gap: 6px;
+}
+
+.tile {
+  background: #1a1a1a;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #333;
+  transition: 0.25s;
+}
+
+.tile:hover {
+  background: #222;
+}
+
+.tile.valid {
+  background: #ffaa00;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+  animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ===== FEEDBACK ===== */
+
+.feedback {
+  /* margin-top: 40px; removed for header placement */
+  text-align: center;
+  opacity: 0.75;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== OVERLAY ===== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.overlay-box {
+  background: #111;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  width: 320px;
+}
+
+#overlayButtons {
+  margin-top: 20px;
+}
+
+#overlayButtons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: radial-gradient(circle, #ffd966, #ff9f1a);
+  box-shadow: 0 0 12px rgba(255, 165, 0, 0.8);
+  margin: 5px;
+  transition: 0.2s;
+}
+
+#overlayButtons button:hover {
+  transform: scale(1.05);
+}
+
+/* ===== WIN ANIMATION ===== */
+
+.win-box {
+  animation: fadeInScale 0.4s ease forwards;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.celebration-text {
+  font-size: 1.0rem;
+  color: #ffaa00;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+  animation: glowPulse 1s ease infinite alternate;
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+  }
+
+  to {
+    text-shadow: 0 0 20px rgba(255, 165, 0, 1);
+  }
+}
+
+/* ================= SPACE BACKGROUND (SUBTLE FOR LEVEL) ================= */
+body.level-screen #space {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: black;
+  overflow: hidden;
+}
+
+body.level-screen .stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+body.level-screen .star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  /* Subtler opacity */
+  animation: starFall linear infinite, twinkle 4s ease-in-out infinite;
+  /* Slower twinkle */
+}
+
+/* size variations */
+body.level-screen .star.tiny {
+  width: 1px;
+  height: 1px;
+  background: #bfbfbf;
+}
+
+body.level-screen .star.mid {
+  width: 2px;
+  height: 2px;
+  background: #dddddd;
+}
+
+body.level-screen .star.big {
+  width: 3px;
+  height: 3px;
+  background: #ffd36a;
+}
+
+@keyframes starFall {
+  from {
+    transform: translateY(-10vh) translateX(0);
+  }
+
+  to {
+    transform: translateY(110vh) translateX(40px);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
+}
+
+/* RULES MODAL */
+.rules-box {
+  background: #111;
+  border: 2px solid #ffaa00;
+  box-shadow: 0 0 20px rgba(255, 170, 0, 0.2);
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.rules-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffd36a;
+  text-transform: uppercase;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(255, 211, 106, 0.5);
+}
+
+#rulesList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 25px;
+  max-height: 50vh;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255, 170, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+#rulesList li {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #eee;
+}
+
+#rulesList li:last-child {
+  border-bottom: none;
+}
+
+/* Custom Scrollbar for rules */
+#rulesList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#rulesList::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+#rulesList::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+#rulesList::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#closeRulesBtn {
+  display: block;
+  margin: 0 auto;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: radial-gradient(circle, #ffd966, #ff9f1a);
+  box-shadow: 0 0 12px rgba(255, 165, 0, 0.8);
+  color: #000;
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#closeRulesBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 165, 0, 1);
+}
