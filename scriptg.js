@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       s.style.left = Math.random() * 100 + "%";
       s.style.top = Math.random() * 100 + "%";
 
-      const duration = 60 + Math.random() * 120;
+      const duration = 80 + Math.random() * 140;
       s.style.animationDuration = duration + "s";
 
       stars.appendChild(s);
@@ -326,3 +326,4 @@ function unlockNextLevel() {
     localStorage.setItem("maxUnlockedLevel", current + 1);
   }
 }
+
